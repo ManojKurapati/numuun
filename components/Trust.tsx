@@ -3,21 +3,12 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { spring } from "@/lib/utils";
-
-const partners = [
-  "St. Mira Pediatrics",
-  "Aravind Vision Care",
-  "Indus Childhood Co.",
-  "Aanya Therapy Group",
-  "Banyan Family Clinic",
-  "Veda Audiology",
-  "Manoah Speech Lab",
-  "Nila Wellness"
-];
-
-const certifications = ["DBT-C", "IAP", "ASHA", "AAP", "WHO-ECDI"];
+import { useDictionary } from "@/lib/i18n/provider";
 
 export function Trust() {
+  const dict = useDictionary();
+  const t = dict.home.trust;
+
   return (
     <section id="trust" className="relative py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -28,11 +19,13 @@ export function Trust() {
           transition={spring}
           className="flex flex-col items-center gap-4 text-center mb-12 sm:mb-16"
         >
-          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-600">
-            <span className="h-px w-8 bg-terracotta-300" /> Trusted alongside
+          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-500">
+            <span className="h-px w-8 bg-terracotta-300" /> {t.eyebrow}
           </span>
           <h2 className="font-serif text-balance text-4xl sm:text-5xl leading-[1.05] tracking-tight text-ink-900 max-w-2xl">
-            A quiet network of <span className="italic text-sage-600">clinicians, schools,</span> and specialists.
+            {t.titlePrefix}{" "}
+            <span className="italic text-sage-500">{t.italic}</span>{" "}
+            {t.titleSuffix}
           </h2>
         </motion.div>
 
@@ -53,7 +46,7 @@ export function Trust() {
           />
 
           <div className="flex w-max animate-marquee gap-12 sm:gap-16">
-            {[...partners, ...partners].map((p, i) => (
+            {[...t.partners, ...t.partners].map((p, i) => (
               <span
                 key={`${p}-${i}`}
                 className="shrink-0 font-serif text-2xl sm:text-3xl text-ink-700/60 hover:text-ink-900 transition-colors whitespace-nowrap"
@@ -74,17 +67,16 @@ export function Trust() {
           <div className="md:col-span-3 relative rounded-[28px] border border-ink-900/8 bg-cream-50 p-8 sm:p-10 shadow-glass">
             <Quote className="absolute -top-4 left-8 h-8 w-8 text-terracotta-500" />
             <p className="font-serif text-[22px] sm:text-[26px] leading-snug text-ink-900 text-balance">
-              &ldquo;Namo gave us a vocabulary for what we were already feeling.
-              Three months in, our daughter is more regulated — and so are we.&rdquo;
+              {t.testimonial.quote}
             </p>
             <footer className="mt-6 flex items-center gap-3">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-sage-100 font-serif text-sage-700">
-                R
+                {t.testimonial.authorInitial}
               </span>
               <div>
-                <p className="text-sm font-medium text-ink-900">Riya & Karan</p>
+                <p className="text-sm font-medium text-ink-900">{t.testimonial.author}</p>
                 <p className="text-[12px] uppercase tracking-[0.16em] text-ink-500">
-                  Parents · Bengaluru
+                  {t.testimonial.role}
                 </p>
               </div>
             </footer>
@@ -92,10 +84,10 @@ export function Trust() {
 
           <div className="md:col-span-2 flex flex-col gap-3">
             <p className="text-[12px] uppercase tracking-[0.18em] text-ink-500">
-              Aligned with
+              {t.alignedWith}
             </p>
             <ul className="flex flex-wrap gap-2">
-              {certifications.map((c) => (
+              {t.certifications.map((c) => (
                 <li
                   key={c}
                   className="rounded-full border border-ink-900/10 bg-cream-50 px-3.5 py-1.5 text-[12px] font-medium tracking-wide text-ink-700"
@@ -105,9 +97,7 @@ export function Trust() {
               ))}
             </ul>
             <p className="mt-3 text-[14px] leading-relaxed text-ink-600">
-              Clinicians at Namo carry recognised pediatric credentials and
-              follow WHO ECDI norms — supervised quarterly by an external
-              developmental pediatrician.
+              {t.alignedBody}
             </p>
           </div>
         </motion.div>

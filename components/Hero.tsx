@@ -7,6 +7,7 @@ import { ShieldCheck, Stars, Mic } from "lucide-react";
 import { ShinyButton } from "./ShinyButton";
 import { VoiceWave } from "./VoiceWave";
 import { spring, softSpring } from "@/lib/utils";
+import { useDictionary } from "@/lib/i18n/provider";
 
 const container = {
   hidden: { opacity: 0 },
@@ -26,18 +27,10 @@ const item = {
   }
 };
 
-const headlineWords = [
-  "Nurturing",
-  "the",
-  "Architecture",
-  "of",
-  "the",
-  "Developing",
-  "Mind."
-];
-
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const dict = useDictionary();
+  const t = dict.home.hero;
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -72,7 +65,7 @@ export function Hero() {
           >
             <motion.div variants={item} className="flex items-center gap-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-terracotta-200 bg-terracotta-50/70 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-terracotta-600">
-                <Stars className="h-3.5 w-3.5" /> The first 2,000 days
+                <Stars className="h-3.5 w-3.5" /> {t.eyebrow}
               </span>
             </motion.div>
 
@@ -80,13 +73,13 @@ export function Hero() {
               variants={container}
               className="font-serif text-balance text-5xl leading-[1.02] tracking-tight text-ink-900 sm:text-6xl lg:text-[78px]"
             >
-              {headlineWords.map((w, i) => (
+              {t.headlineWords.map((w, i) => (
                 <motion.span
                   key={`${w}-${i}`}
                   variants={item}
                   className="inline-block mr-[0.22em]"
                 >
-                  {w === "Architecture" ? (
+                  {w === t.italicWord ? (
                     <span className="italic text-terracotta-500">{w}</span>
                   ) : (
                     w
@@ -99,14 +92,13 @@ export function Hero() {
               variants={item}
               className="max-w-xl text-[17px] leading-relaxed text-ink-600"
             >
-              Scientific milestone tracking and personalized intervention for
-              children aged 0–6. Because the first 2,000 days shape a lifetime.
+              {t.subhead}
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">
-              <ShinyButton href="#assessment">Start Your First Assessment</ShinyButton>
-              <ShinyButton href="#method" variant="ghost">
-                See how it works
+              <ShinyButton href="#assessment">{t.primaryCta}</ShinyButton>
+              <ShinyButton href="/institutions" variant="ghost">
+                {t.secondaryCta}
               </ShinyButton>
             </motion.div>
 
@@ -114,11 +106,7 @@ export function Hero() {
               variants={item}
               className="mt-2 grid grid-cols-3 gap-6 border-t border-ink-900/10 pt-6 max-w-lg"
             >
-              {[
-                { k: "ASQ-3", v: "Gold standard" },
-                { k: "5", v: "Developmental domains" },
-                { k: "0–6", v: "Years served" }
-              ].map((s) => (
+              {t.stats.map((s) => (
                 <div key={s.v}>
                   <dt className="font-serif text-2xl text-ink-900">{s.k}</dt>
                   <dd className="text-[12px] uppercase tracking-[0.14em] text-ink-500">
@@ -139,7 +127,7 @@ export function Hero() {
               <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0">
                 <Image
                   src="https://images.unsplash.com/photo-1581952976147-5a2d15560349?auto=format&fit=crop&w=1400&q=80"
-                  alt="A parent and child playing together in soft natural light"
+                  alt={t.imageAlt}
                   fill
                   priority
                   sizes="(min-width: 1024px) 560px, 100vw"
@@ -163,15 +151,15 @@ export function Hero() {
                   </span>
                   <div>
                     <p className="text-[12px] uppercase tracking-[0.14em] text-ink-500">
-                      Today&rsquo;s assessment
+                      {t.floatingCard.eyebrow}
                     </p>
                     <p className="font-serif text-base text-ink-900">
-                      Fine motor · stacking blocks
+                      {t.floatingCard.title}
                     </p>
                   </div>
                 </div>
                 <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-terracotta-400 px-3 py-1 text-[11px] font-medium text-cream-50">
-                  2 min
+                  {t.floatingCard.badge}
                 </span>
               </motion.div>
             </div>
@@ -187,7 +175,7 @@ export function Hero() {
               </span>
               <div className="flex flex-col gap-1.5">
                 <p className="text-[11px] uppercase tracking-[0.14em] text-ink-500">
-                  Voice-first · listening
+                  {t.voiceChip.eyebrow}
                 </p>
                 <VoiceWave bars={14} height={20} />
               </div>

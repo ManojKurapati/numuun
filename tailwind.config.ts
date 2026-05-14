@@ -5,8 +5,20 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["var(--font-playfair)", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"]
+        serif: [
+          "var(--font-playfair)",
+          "var(--font-amiri)",
+          "Georgia",
+          "serif"
+        ],
+        sans: [
+          "var(--font-inter)",
+          "var(--font-plex-arabic)",
+          "system-ui",
+          "sans-serif"
+        ],
+        arabicSerif: ["var(--font-amiri)", "Georgia", "serif"],
+        arabicSans: ["var(--font-plex-arabic)", "system-ui", "sans-serif"]
       },
       colors: {
         cream: {

@@ -4,36 +4,10 @@ import { motion } from "framer-motion";
 import { BadgeCheck, Mic, Repeat } from "lucide-react";
 import { VoiceWave } from "./VoiceWave";
 import { spring } from "@/lib/utils";
+import { useDictionary } from "@/lib/i18n/provider";
 
-const pillars = [
-  {
-    icon: BadgeCheck,
-    eyebrow: "Gold standard",
-    title: "ASQ-3, made beautifully digital.",
-    body:
-      "Namo runs the world’s most trusted developmental screen — Ages & Stages Questionnaires, third edition — inside an interface parents actually enjoy returning to.",
-    tone: "terracotta",
-    detail: "Validated across 12,000+ children · 30+ languages"
-  },
-  {
-    icon: Mic,
-    eyebrow: "Voice-first",
-    title: "Hands-free, while you play.",
-    body:
-      "Speak observations as they happen. Namo’s ambient voice mode captures milestones with a single sentence — no forms, no fumbling, no friction.",
-    tone: "sage",
-    detail: "Offline-ready · child-safe wake phrase"
-  },
-  {
-    icon: Repeat,
-    eyebrow: "Closed-loop",
-    title: "Detection ends in action.",
-    body:
-      "Every flagged delay is paired with a guided, video-led activity for that exact skill — so the gap closes the same week it’s spotted.",
-    tone: "ink",
-    detail: "200+ clinician-authored interventions"
-  }
-];
+const icons = [BadgeCheck, Mic, Repeat];
+const tones = ["terracotta", "sage", "ink"] as const;
 
 const fade = {
   hidden: { opacity: 0, y: 20 },
@@ -45,6 +19,9 @@ const fade = {
 };
 
 export function Method() {
+  const dict = useDictionary();
+  const t = dict.home.method;
+
   return (
     <section id="method" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -56,28 +33,26 @@ export function Method() {
           className="flex flex-col items-start gap-4 max-w-2xl mb-14 sm:mb-20"
         >
           <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-500">
-            <span className="h-px w-8 bg-terracotta-300" /> The Namo difference
+            <span className="h-px w-8 bg-terracotta-300" /> {t.eyebrow}
           </span>
           <h2 className="font-serif text-balance text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-ink-900">
-            The same science, delivered with{" "}
-            <span className="italic text-sage-500">a steadier hand</span>.
+            {t.titlePrefix}{" "}
+            <span className="italic text-sage-500">{t.italic}</span>
+            {t.titleSuffix}
           </h2>
-          <p className="text-[17px] leading-relaxed text-ink-600">
-            Three principles separate Namo from a folder of paper screens —
-            and turn early detection into early action.
-          </p>
+          <p className="text-[17px] leading-relaxed text-ink-600">{t.subhead}</p>
         </motion.div>
 
         <div className="grid gap-5 md:grid-cols-3">
-          {pillars.map((p, i) => {
-            const Icon = p.icon;
+          {t.pillars.map((p, i) => {
+            const Icon = icons[i] ?? BadgeCheck;
+            const tone = tones[i] ?? "terracotta";
             const palette =
-              p.tone === "terracotta"
+              tone === "terracotta"
                 ? "bg-terracotta-50 text-terracotta-500"
-                : p.tone === "sage"
+                : tone === "sage"
                 ? "bg-sage-50 text-sage-500"
                 : "bg-cream-200 text-ink-800";
-
             return (
               <motion.article
                 key={p.title}
@@ -109,11 +84,11 @@ export function Method() {
                   <p className="text-[15px] leading-relaxed text-ink-600">{p.body}</p>
                 </div>
 
-                {p.tone === "sage" && (
+                {tone === "sage" && "quote" in p && p.quote && (
                   <div className="mt-1 flex items-center gap-3 rounded-2xl bg-sage-50 px-4 py-3">
                     <VoiceWave bars={12} height={22} barClassName="bg-sage-500" />
                     <span className="text-[12px] font-medium text-sage-700">
-                      &ldquo;She just stacked four blocks.&rdquo;
+                      {p.quote}
                     </span>
                   </div>
                 )}

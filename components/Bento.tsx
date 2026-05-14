@@ -10,13 +10,10 @@ import {
   PersonalSocialIcon
 } from "./icons/DomainIcons";
 import { cn, spring } from "@/lib/utils";
+import { useDictionary } from "@/lib/i18n/provider";
 
-const domains = [
-  {
-    key: "communication",
-    title: "Communication",
-    body: "Monitoring language acquisition and social understanding.",
-    age: "Domain 01",
+const visuals = {
+  communication: {
     Icon: CommunicationIcon,
     span: "md:col-span-3 md:row-span-2",
     tone: "bg-terracotta-400 text-cream-50",
@@ -25,55 +22,43 @@ const domains = [
     metaTone: "text-cream-50/80",
     feature: true
   },
-  {
-    key: "gross-motor",
-    title: "Gross Motor",
-    body: "Tracking physical coordination, balance, and large-muscle growth.",
-    age: "Domain 02",
+  "gross-motor": {
     Icon: GrossMotorIcon,
     span: "md:col-span-2",
     tone: "bg-sage-400 text-cream-50",
     iconBg: "bg-cream-50/15 text-cream-50",
     captionTone: "text-cream-50/85",
-    metaTone: "text-cream-50/80"
+    metaTone: "text-cream-50/80",
+    feature: false
   },
-  {
-    key: "fine-motor",
-    title: "Fine Motor",
-    body: "Observing the precision of hand-eye coordination and small movements.",
-    age: "Domain 03",
+  "fine-motor": {
     Icon: FineMotorIcon,
     span: "md:col-span-2",
     tone: "bg-cream-100 text-ink-900",
     iconBg: "bg-ink-900/5 text-ink-900",
     captionTone: "text-ink-600",
-    metaTone: "text-ink-500"
+    metaTone: "text-ink-500",
+    feature: false
   },
-  {
-    key: "problem-solving",
-    title: "Problem Solving",
-    body: "Measuring cognitive processing and early logical reasoning.",
-    age: "Domain 04",
+  "problem-solving": {
     Icon: ProblemSolvingIcon,
     span: "md:col-span-2",
     tone: "bg-ink-900 text-cream-50",
     iconBg: "bg-cream-50/12 text-cream-50",
     captionTone: "text-cream-50/85",
-    metaTone: "text-cream-50/70"
+    metaTone: "text-cream-50/70",
+    feature: false
   },
-  {
-    key: "personal-social",
-    title: "Personal-Social",
-    body: "Assessing emotional intelligence and social-behavioural bonds.",
-    age: "Domain 05",
+  "personal-social": {
     Icon: PersonalSocialIcon,
     span: "md:col-span-3",
     tone: "bg-terracotta-50 text-ink-900",
     iconBg: "bg-terracotta-100 text-terracotta-500",
     captionTone: "text-ink-600",
-    metaTone: "text-ink-500"
+    metaTone: "text-ink-500",
+    feature: false
   }
-];
+} as const;
 
 const variants = {
   hidden: { opacity: 0, y: 20, scale: 0.98 },
@@ -86,6 +71,9 @@ const variants = {
 };
 
 export function Bento() {
+  const dict = useDictionary();
+  const t = dict.home.bento;
+
   return (
     <section id="milestones" className="relative py-24 sm:py-32 bg-cream-100/60">
       <div aria-hidden className="absolute inset-0 grid-lines opacity-50" />
@@ -100,11 +88,12 @@ export function Bento() {
             className="max-w-2xl flex flex-col gap-3"
           >
             <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-500">
-              <span className="h-px w-8 bg-terracotta-300" /> Five ASQ-3 domains
+              <span className="h-px w-8 bg-terracotta-300" /> {t.eyebrow}
             </span>
             <h2 className="font-serif text-balance text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-ink-900">
-              A full picture of growth,{" "}
-              <span className="italic text-terracotta-500">domain by domain</span>.
+              {t.titlePrefix}{" "}
+              <span className="italic text-terracotta-500">{t.italic}</span>
+              {t.titleSuffix}
             </h2>
           </motion.div>
           <motion.p
@@ -114,15 +103,14 @@ export function Bento() {
             transition={{ ...spring, delay: 0.12 }}
             className="max-w-md text-[15px] leading-relaxed text-ink-600"
           >
-            ASQ-3 is the only validated screen that crosses every channel of
-            early development. Namo tracks all five — together, longitudinally —
-            from first sounds to first day of school.
+            {t.subhead}
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 auto-rows-[minmax(180px,auto)] gap-4">
-          {domains.map((d, i) => {
-            const Icon = d.Icon;
+          {t.domains.map((d, i) => {
+            const v = visuals[d.key as keyof typeof visuals];
+            const Icon = v.Icon;
             return (
               <motion.article
                 key={d.key}
@@ -135,11 +123,11 @@ export function Bento() {
                 transition={spring}
                 className={cn(
                   "relative overflow-hidden rounded-[26px] p-6 sm:p-7 shadow-glass border border-ink-900/8 flex flex-col justify-between",
-                  d.tone,
-                  d.span
+                  v.tone,
+                  v.span
                 )}
               >
-                {d.feature && (
+                {v.feature && (
                   <Image
                     src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1400&q=80"
                     alt=""
@@ -149,20 +137,10 @@ export function Bento() {
                   />
                 )}
                 <div className="relative flex items-center justify-between">
-                  <span
-                    className={cn(
-                      "grid h-12 w-12 place-items-center rounded-2xl",
-                      d.iconBg
-                    )}
-                  >
+                  <span className={cn("grid h-12 w-12 place-items-center rounded-2xl", v.iconBg)}>
                     <Icon className="h-6 w-6" />
                   </span>
-                  <span
-                    className={cn(
-                      "text-[11px] uppercase tracking-[0.18em]",
-                      d.metaTone
-                    )}
-                  >
+                  <span className={cn("text-[11px] uppercase tracking-[0.18em]", v.metaTone)}>
                     {d.age}
                   </span>
                 </div>
@@ -171,17 +149,12 @@ export function Bento() {
                   <h3
                     className={cn(
                       "font-serif leading-tight",
-                      d.feature ? "text-4xl sm:text-5xl" : "text-2xl sm:text-[26px]"
+                      v.feature ? "text-4xl sm:text-5xl" : "text-2xl sm:text-[26px]"
                     )}
                   >
                     {d.title}
                   </h3>
-                  <p
-                    className={cn(
-                      "text-[14px] leading-relaxed max-w-sm",
-                      d.captionTone
-                    )}
-                  >
+                  <p className={cn("text-[14px] leading-relaxed max-w-sm", v.captionTone)}>
                     {d.body}
                   </p>
                 </div>
@@ -195,10 +168,10 @@ export function Bento() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
           transition={spring}
-          className="mt-10 flex items-center justify-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink-500"
+          className="mt-10 flex items-center justify-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink-500 text-center"
         >
           <span className="h-px w-10 bg-terracotta-300" />
-          <span>One child. Five domains. Six years of guided growth.</span>
+          <span>{t.footer}</span>
           <span className="h-px w-10 bg-terracotta-300" />
         </motion.div>
       </div>

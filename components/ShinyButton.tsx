@@ -1,10 +1,13 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { spring } from "@/lib/utils";
+
+const MotionLink = motion(Link);
 
 type Props = {
   children: React.ReactNode;
@@ -46,7 +49,7 @@ export function ShinyButton({
 
   if (variant === "ghost") {
     return (
-      <motion.a
+      <MotionLink
         ref={ref}
         href={href}
         onMouseMove={handleMove}
@@ -65,12 +68,12 @@ export function ShinyButton({
         {icon && (
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
         )}
-      </motion.a>
+      </MotionLink>
     );
   }
 
   return (
-    <motion.a
+    <MotionLink
       ref={ref}
       href={href}
       onMouseMove={handleMove}
@@ -101,6 +104,6 @@ export function ShinyButton({
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         )}
       </span>
-    </motion.a>
+    </MotionLink>
   );
 }

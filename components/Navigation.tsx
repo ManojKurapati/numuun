@@ -1,21 +1,27 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn, spring } from "@/lib/utils";
 import { ShinyButton } from "./ShinyButton";
-
-const links = [
-  { label: "Difference", href: "#method" },
-  { label: "Domains", href: "#milestones" },
-  { label: "Journey", href: "#process" },
-  { label: "Dashboard", href: "#dashboard" }
-];
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import { useDictionary } from "@/lib/i18n/provider";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const dict = useDictionary();
+
+  const links = [
+    { label: dict.common.nav.home, href: "/" },
+    { label: dict.common.nav.parents, href: "/parents" },
+    { label: dict.common.nav.institutions, href: "/institutions" },
+    { label: dict.common.nav.science, href: "/science" }
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,6 +29,8 @@ export function Navigation() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => setOpen(false), [pathname]);
 
   return (
     <motion.header
@@ -37,32 +45,52 @@ export function Navigation() {
           scrolled ? "glass-strong shadow-glass" : "glass"
         )}
       >
-        <a href="#" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group">
           <span className="relative grid h-8 w-8 place-items-center rounded-full bg-terracotta-400 text-cream-50 shadow-soft">
             <Sparkles className="h-4 w-4" strokeWidth={2.2} />
           </span>
           <span className="font-serif text-xl tracking-tight text-ink-900 group-hover:text-terracotta-500 transition-colors">
-            Namo
+            {dict.common.brand}
           </span>
-        </a>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-1">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="relative rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 transition-colors"
-              >
-                <span className="relative z-10">{l.label}</span>
-                <span className="absolute inset-0 -z-0 rounded-full bg-cream-100/0 transition-colors hover:bg-cream-200/60" />
-              </a>
-            </li>
-          ))}
+          {links.map((l) => {
+            const active =
+              l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={cn(
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    active ? "text-ink-900" : "text-ink-700 hover:text-ink-900"
+                  )}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="nav-active"
+                      transition={spring}
+                      className="absolute inset-0 -z-0 rounded-full bg-cream-200/60"
+                    />
+                  )}
+                  <span className="relative z-10">{l.label}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          <LocaleSwitcher />
+          <Link
+            href="#login"
+            className="text-sm font-medium text-ink-700 hover:text-ink-900 transition-colors"
+          >
+            {dict.common.nav.login}
+          </Link>
           <ShinyButton href="#assessment" className="px-5 py-2.5 text-[13px]">
-            Start assessment
+            {dict.common.cta.startAssessment}
           </ShinyButton>
         </div>
 
@@ -87,18 +115,28 @@ export function Navigation() {
             <ul className="flex flex-col gap-1">
               {links.map((l) => (
                 <li key={l.href}>
-                  <a
+                  <Link
                     href={l.href}
-                    onClick={() => setOpen(false)}
                     className="block rounded-2xl px-4 py-3 text-sm font-medium text-ink-800 hover:bg-cream-100"
                   >
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="#login"
+                  className="block rounded-2xl px-4 py-3 text-sm font-medium text-ink-700 hover:bg-cream-100"
+                >
+                  {dict.common.nav.loginSignup}
+                </Link>
+              </li>
               <li className="pt-2">
+                <div className="px-2 pb-3">
+                  <LocaleSwitcher className="w-full justify-center" />
+                </div>
                 <ShinyButton href="#assessment" className="w-full justify-center">
-                  Start assessment
+                  {dict.common.cta.startAssessment}
                 </ShinyButton>
               </li>
             </ul>
