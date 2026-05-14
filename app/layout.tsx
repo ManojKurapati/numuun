@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   title: "Namo — Nurturing the Architecture of the Developing Mind",
   description:
     "Namo is a clinical-grade early childhood development platform for the Gulf — ASQ-3 screening, voice-first assessments, and closed-loop interventions for children aged 0–6.",
-  metadataBase: new URL("https://namo.ae")
+  metadataBase: new URL("https://numuun.health")
 };
 
 const earlyLocaleScript = `
