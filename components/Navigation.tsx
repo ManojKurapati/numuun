@@ -3,25 +3,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn, spring } from "@/lib/utils";
 import { ShinyButton } from "./ShinyButton";
-import { LocaleSwitcher } from "./LocaleSwitcher";
-import { useDictionary } from "@/lib/i18n/provider";
+import { Logo } from "./Logo";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Milestones", href: "/milestones" },
+  { label: "Blog", href: "/blog" }
+];
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const dict = useDictionary();
-
-  const links = [
-    { label: dict.common.nav.home, href: "/" },
-    { label: dict.common.nav.parents, href: "/parents" },
-    { label: dict.common.nav.institutions, href: "/institutions" },
-    { label: dict.common.nav.science, href: "/science" }
-  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -45,14 +42,7 @@ export function Navigation() {
           scrolled ? "glass-strong shadow-glass" : "glass"
         )}
       >
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="relative grid h-8 w-8 place-items-center rounded-full bg-terracotta-400 text-cream-50 shadow-soft">
-            <Sparkles className="h-4 w-4" strokeWidth={2.2} />
-          </span>
-          <span className="font-serif text-xl tracking-tight text-ink-900 group-hover:text-terracotta-500 transition-colors">
-            {dict.common.brand}
-          </span>
-        </Link>
+        <Logo />
 
         <ul className="hidden md:flex items-center gap-1">
           {links.map((l) => {
@@ -81,16 +71,9 @@ export function Navigation() {
           })}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
-          <LocaleSwitcher />
-          <Link
-            href="#login"
-            className="text-sm font-medium text-ink-700 hover:text-ink-900 transition-colors"
-          >
-            {dict.common.nav.login}
-          </Link>
-          <ShinyButton href="#assessment" className="px-5 py-2.5 text-[13px]">
-            {dict.common.cta.startAssessment}
+        <div className="hidden md:block">
+          <ShinyButton href="#subscribe" className="px-5 py-2.5 text-[13px]">
+            Join the club
           </ShinyButton>
         </div>
 
@@ -123,20 +106,12 @@ export function Navigation() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="#login"
-                  className="block rounded-2xl px-4 py-3 text-sm font-medium text-ink-700 hover:bg-cream-100"
-                >
-                  {dict.common.nav.loginSignup}
-                </Link>
-              </li>
               <li className="pt-2">
-                <div className="px-2 pb-3">
-                  <LocaleSwitcher className="w-full justify-center" />
-                </div>
-                <ShinyButton href="#assessment" className="w-full justify-center">
-                  {dict.common.cta.startAssessment}
+                <ShinyButton
+                  href="#subscribe"
+                  className="w-full justify-center"
+                >
+                  Join the club
                 </ShinyButton>
               </li>
             </ul>
