@@ -7,20 +7,23 @@ const config: Config = {
       fontFamily: {
         serif: [
           "var(--font-playfair)",
-          "var(--font-amiri)",
           "Georgia",
           "serif"
         ],
         sans: [
           "var(--font-inter)",
-          "var(--font-plex-arabic)",
           "system-ui",
           "sans-serif"
-        ],
-        arabicSerif: ["var(--font-amiri)", "Georgia", "serif"],
-        arabicSans: ["var(--font-plex-arabic)", "system-ui", "sans-serif"]
+        ]
       },
       colors: {
+        sun: {
+          50: "#FFF9E8",
+          100: "#FFF1C7",
+          200: "#FFE49A",
+          300: "#FFD66B",
+          400: "#F9C23C"
+        },
         cream: {
           50: "#FCF9F6",
           100: "#F6EFE4",
@@ -68,6 +71,10 @@ const config: Config = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" }
         },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-6deg)" },
+          "50%": { transform: "rotate(6deg)" }
+        },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" }
@@ -75,6 +82,7 @@ const config: Config = {
       },
       animation: {
         marquee: "marquee 40s linear infinite",
+        wiggle: "wiggle 2.4s ease-in-out infinite",
         shimmer: "shimmer 6s linear infinite"
       }
     }
