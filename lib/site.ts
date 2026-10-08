@@ -9,5 +9,6 @@ export const site = {
   // Where the "Subscribe" form sends emails: the Google Apps Script web app URL
   // that writes to the subscribers Google Sheet (see scripts/subscribe-to-sheet.gs).
   // The form posts `email` and `page`. Leave empty to fall back to a mailto link.
-  subscribeEndpoint: process.env.NEXT_PUBLIC_SUBSCRIBE_ENDPOINT ?? ""
+  subscribeEndpoint: process.env.NEXT_PUBLIC_SUBSCRIBE_ENDPOINT ??
+    "https://script.google.com/macros/s/AKfycbyBV2WMjKghgmGPxGGldTpqO0J-z4woiLQoyuq985YrpBP2K8fYUd4GYH2nbg5PCwlrgg/exec"
 };
