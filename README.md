@@ -13,14 +13,22 @@ to `main` redeploys numuun.health.
 
 Posts with a future `date` stay hidden until a build runs on or after that day.
 
-## Collect subscriber emails
+## Collect subscriber emails (Google Sheet)
 
-The subscribe form posts one field, `email`, to the URL in
-`lib/site.ts` → `subscribeEndpoint`. Sign up for any email tool with an embed
-form (Buttondown, Formspree, Mailchimp, ConvertKit…), copy its form action URL,
-and either paste it there or set the `NEXT_PUBLIC_SUBSCRIBE_ENDPOINT`
-environment variable. Until then the form opens a pre-filled email to
-hello@numuun.health instead.
+Subscribers land in the Google Sheet via a small Apps Script web app.
+
+1. Open the sheet → **Extensions → Apps Script**.
+2. Replace the editor contents with `scripts/subscribe-to-sheet.gs` and save.
+3. **Deploy → New deployment** → type **Web app**. Execute as **Me**,
+   who has access **Anyone**. Authorize when asked.
+4. Copy the web app URL (ends in `/exec`) into `subscribeEndpoint` in
+   `lib/site.ts`, commit and push.
+
+Each signup adds a row: timestamp, email, and the page they signed up from.
+Duplicate emails are skipped. If you edit the script later, use
+**Deploy → Manage deployments → Edit → New version** so the URL stays the same.
+
+Until the URL is set, the form opens a pre-filled email to hello@numuun.health.
 
 ## Edit milestones
 

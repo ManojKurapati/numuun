@@ -29,9 +29,9 @@ export function SubscribeForm({
     }
     setStatus("sending");
     try {
-      const body = new FormData();
-      body.append("email", email);
-      // no-cors lets this work with any provider's embed endpoint from a static site.
+      // A url-encoded body + no-cors is a "simple" request, so it works from a
+      // static site with Google Apps Script as well as Formspree/Buttondown etc.
+      const body = new URLSearchParams({ email, page: window.location.pathname });
       await fetch(site.subscribeEndpoint, { method: "POST", body, mode: "no-cors" });
       setStatus("done");
     } catch {
