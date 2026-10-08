@@ -4,6 +4,7 @@ import { WinsMarquee } from "@/components/WinsMarquee";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ShinyButton } from "@/components/ShinyButton";
 import { PostCard } from "@/components/PostCard";
+import { Survey } from "@/components/Survey";
 import { stages } from "@/lib/milestones";
 import { getAllPosts } from "@/lib/blog";
 
@@ -53,6 +54,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <Survey />
 
       <section className="bg-cream-100/70 py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
