@@ -50,12 +50,7 @@ export function Hero() {
               className="font-serif text-balance text-5xl leading-[1.02] tracking-tight text-ink-900 sm:text-6xl lg:text-[76px]"
             >
               Raising a tiny human is the{" "}
-              <span className="relative inline-block italic text-terracotta-500">
-                coolest
-                <svg aria-hidden viewBox="0 0 200 12" className="absolute -bottom-2 left-0 w-full text-sun-400">
-                  <path d="M2 9 C 50 2, 150 2, 198 8" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
-                </svg>
-              </span>{" "}
+              <span className="italic text-terracotta-500">coolest</span>{" "}
               job there is.
             </motion.h1>
 
