@@ -23,10 +23,10 @@ export function SectionHeader({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-15%" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={spring}
       className={cn(
-        "flex flex-col gap-4 max-w-2xl mb-12 sm:mb-16",
+        "flex flex-col gap-4 max-w-2xl mb-10 sm:mb-16",
         align === "center" && "items-center text-center mx-auto",
         className
       )}
@@ -34,11 +34,11 @@ export function SectionHeader({
       <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-500">
         <span className="h-px w-8 bg-terracotta-300" /> {eyebrow}
       </span>
-      <h2 className="font-serif text-balance text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-ink-900">
+      <h2 className="font-serif text-balance text-[34px] sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-ink-900">
         {title}
       </h2>
       {subhead && (
-        <p className="text-[17px] leading-relaxed text-ink-600">{subhead}</p>
+        <p className="text-[16px] sm:text-[17px] leading-relaxed text-ink-600">{subhead}</p>
       )}
     </motion.div>
   );

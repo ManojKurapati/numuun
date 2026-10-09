@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
@@ -26,7 +26,25 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`
   },
   description: site.description,
-  metadataBase: new URL(site.url)
+  metadataBase: new URL(site.url),
+  openGraph: {
+    type: "website",
+    siteName: `${site.name}.health`,
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+    url: site.url
+  },
+  twitter: {
+    card: "summary",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FCF9F6",
+  width: "device-width",
+  initialScale: 1
 };
 
 export default function RootLayout({

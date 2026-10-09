@@ -18,9 +18,9 @@ const item = {
 };
 
 const chips = [
-  { text: "First steps", emoji: "👣", className: "-left-3 sm:-left-8 top-10", delay: 0.5 },
+  { text: "First steps", emoji: "👣", className: "-left-2 sm:-left-8 top-8 sm:top-10", delay: 0.5 },
   { text: "Said “banana”", emoji: "🍌", className: "-right-2 sm:-right-6 top-1/3", delay: 0.7 },
-  { text: "Stacked 3 blocks", emoji: "🧱", className: "left-6 bottom-8", delay: 0.9 }
+  { text: "Stacked 3 blocks", emoji: "🧱", className: "left-4 sm:left-6 bottom-6 sm:bottom-8", delay: 0.9 }
 ];
 
 export function Hero() {
@@ -31,12 +31,12 @@ export function Hero() {
       <div aria-hidden className="absolute -bottom-40 right-0 h-[520px] w-[520px] rounded-full bg-terracotta-200/40 blur-3xl" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid items-center gap-12 lg:gap-14 lg:grid-cols-12">
+        <div className="grid grid-cols-1 items-center gap-12 lg:gap-14 lg:grid-cols-12">
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="lg:col-span-6 flex flex-col gap-7"
+            className="min-w-0 lg:col-span-6 flex flex-col gap-6 sm:gap-7"
           >
             <motion.span
               variants={item}
@@ -47,14 +47,14 @@ export function Hero() {
 
             <motion.h1
               variants={item}
-              className="font-serif text-balance text-5xl leading-[1.02] tracking-tight text-ink-900 sm:text-6xl lg:text-[76px]"
+              className="font-serif text-balance text-[44px] leading-[1.04] tracking-tight text-ink-900 sm:text-6xl lg:text-[76px]"
             >
               Raising a tiny human is the{" "}
               <span className="italic text-terracotta-500">coolest</span>{" "}
               job there is.
             </motion.h1>
 
-            <motion.p variants={item} className="max-w-xl text-[17px] leading-relaxed text-ink-600">
+            <motion.p variants={item} className="max-w-xl text-[16px] sm:text-[17px] leading-relaxed text-ink-600">
               Every babble, wobble and “why?” is your kid’s brain building
               itself — and you’re the architect. We break down developmental
               milestones from birth to five, so you know what’s coming and
@@ -76,9 +76,9 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...softSpring, delay: 0.25 }}
-            className="lg:col-span-6 relative"
+            className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none lg:col-span-6"
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] shadow-soft rotate-1">
+            <div className="relative aspect-[5/6] sm:aspect-[4/5] w-full overflow-hidden rounded-[28px] bg-gradient-to-br from-terracotta-100 via-cream-100 to-sun-100 shadow-soft rotate-1">
               <Image
                 src="https://images.unsplash.com/photo-1581952976147-5a2d15560349?auto=format&fit=crop&w=1400&q=80"
                 alt="A parent and toddler laughing together"
@@ -97,10 +97,10 @@ export function Hero() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ ...spring, delay: c.delay }}
                 whileHover={{ scale: 1.06, rotate: -2 }}
-                className={`absolute ${c.className} flex items-center gap-2.5 rounded-full glass-strong px-4 py-2.5 shadow-glass`}
+                className={`absolute ${c.className} flex items-center gap-2 sm:gap-2.5 rounded-full glass-strong px-3 py-2 sm:px-4 sm:py-2.5 shadow-glass`}
               >
                 <span className="text-lg">{c.emoji}</span>
-                <span className="text-sm font-medium text-ink-900">{c.text}</span>
+                <span className="whitespace-nowrap text-[13px] sm:text-sm font-medium text-ink-900">{c.text}</span>
                 <span className="rounded-full bg-sage-500 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cream-50">
                   Win
                 </span>

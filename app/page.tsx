@@ -84,7 +84,7 @@ export default function HomePage() {
               </Link>
             ))}
             <div className="flex items-center rounded-[22px] bg-ink-900 p-5">
-              <ShinyButton href="/milestones" className="w-full justify-center px-4">
+              <ShinyButton href="/milestones" className="w-full justify-center whitespace-nowrap px-4 text-[13px] sm:text-sm">
                 See them all
               </ShinyButton>
             </div>

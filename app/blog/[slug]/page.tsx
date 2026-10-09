@@ -34,10 +34,10 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       </Link>
 
       <header className="mt-8 flex flex-col gap-5">
-        <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.14em] text-ink-500">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[12px] uppercase tracking-[0.14em] text-ink-500">
           {post.emoji && <span className="text-2xl">{post.emoji}</span>}
           {post.tag && (
-            <span className="rounded-full bg-terracotta-50 px-3 py-1 font-medium text-terracotta-600">
+            <span className="whitespace-nowrap rounded-full bg-terracotta-50 px-3 py-1 font-medium text-terracotta-600">
               {post.tag}
             </span>
           )}
