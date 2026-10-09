@@ -16,7 +16,7 @@ export default function BlogPage() {
         <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-terracotta-500">
           <span className="h-px w-8 bg-terracotta-300" /> The blog
         </span>
-        <h1 className="font-serif text-balance text-5xl sm:text-6xl leading-[1.03] tracking-tight text-ink-900">
+        <h1 className="font-serif text-balance text-[44px] sm:text-6xl leading-[1.04] tracking-tight text-ink-900">
           Notes from the <span className="italic text-terracotta-500">playroom.</span>
         </h1>
         <p className="text-[17px] leading-relaxed text-ink-600">

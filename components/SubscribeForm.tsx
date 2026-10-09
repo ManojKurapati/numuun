@@ -69,7 +69,7 @@ export function SubscribeForm({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className={cn(
-              "flex items-center gap-2 rounded-full p-1.5 pl-5 shadow-soft",
+              "flex w-full items-center gap-2 rounded-full p-1.5 pl-4 sm:pl-5 shadow-soft",
               dark ? "bg-cream-50" : "bg-white border border-ink-900/10"
             )}
           >
@@ -85,12 +85,12 @@ export function SubscribeForm({
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="min-w-0 flex-1 bg-transparent text-[15px] text-ink-900 placeholder:text-ink-500 focus:outline-none"
+              className="min-w-0 flex-1 bg-transparent text-[16px] text-ink-900 placeholder:text-ink-500 focus:outline-none"
             />
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-900 px-5 py-3 text-sm font-medium text-cream-50 transition-colors hover:bg-terracotta-500 disabled:opacity-70"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-900 px-4 sm:px-5 py-3 text-sm font-medium text-cream-50 transition-colors hover:bg-terracotta-500 disabled:opacity-70"
             >
               {status === "sending" ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

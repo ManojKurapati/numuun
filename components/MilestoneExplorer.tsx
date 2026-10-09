@@ -21,6 +21,18 @@ export function MilestoneExplorer() {
     } catch {}
   }, []);
 
+  useEffect(() => {
+    // Keep the selected age pill in view on narrow screens without scrolling the page.
+    const tab = document.getElementById(`tab-${active}`);
+    const strip = tab?.closest(".overflow-x-auto");
+    if (tab && strip) {
+      strip.scrollTo({
+        left: tab.offsetLeft - strip.clientWidth / 2 + tab.clientWidth / 2,
+        behavior: "smooth"
+      });
+    }
+  }, [active]);
+
   function choose(id: string) {
     setActive(id);
     history.replaceState(null, "", `#${id}`);
@@ -44,11 +56,12 @@ export function MilestoneExplorer() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+      <div className="relative -mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [mask-image:linear-gradient(to_right,black_85%,transparent)] sm:mx-0 sm:px-0 xl:[mask-image:none]">
         <div role="tablist" aria-label="Child's age" className="flex w-max gap-2">
           {stages.map((s) => (
             <button
               key={s.id}
+              id={`tab-${s.id}`}
               role="tab"
               aria-selected={s.id === active}
               onClick={() => choose(s.id)}
@@ -79,7 +92,7 @@ export function MilestoneExplorer() {
           transition={spring}
           className="flex flex-col gap-6"
         >
-          <div className="flex flex-col gap-5 rounded-[28px] bg-terracotta-400 p-7 sm:p-10 text-cream-50 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-5 rounded-[28px] bg-terracotta-400 p-6 sm:p-10 text-cream-50 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex flex-col gap-2">
               <p className="text-[12px] uppercase tracking-[0.2em] text-cream-100">
                 Around {stage.age}

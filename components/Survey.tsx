@@ -18,16 +18,16 @@ export function Survey() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
+        viewport={{ once: true, margin: "0px 0px -10% 0px" }}
         transition={spring}
-        className="relative overflow-hidden rounded-[32px] border border-ink-900/10 bg-sun-50 p-6 sm:p-10"
+        className="relative overflow-hidden rounded-[32px] border border-ink-900/10 bg-sun-50 p-5 sm:p-10"
       >
         <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sun-200/60 blur-3xl" />
         <div className="relative mb-8 flex max-w-2xl flex-col gap-3">
           <span className="inline-flex w-fit items-center gap-2 rounded-full bg-sun-200 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink-800">
             ✨ 2-minute survey
           </span>
-          <h2 className="font-serif text-balance text-4xl sm:text-5xl leading-[1.05] tracking-tight text-ink-900">
+          <h2 className="font-serif text-balance text-[34px] sm:text-5xl leading-[1.05] tracking-tight text-ink-900">
             Help us build what you would <span className="italic text-terracotta-500">love.</span>
           </h2>
           <p className="text-[17px] leading-relaxed text-ink-600">
@@ -37,7 +37,7 @@ export function Survey() {
         </div>
         <div
           data-tf-live={TYPEFORM_ID}
-          className="relative min-h-[520px] overflow-hidden rounded-[20px] bg-white"
+          className="relative min-h-[560px] sm:min-h-[520px] overflow-hidden rounded-[20px] bg-white"
         />
       </motion.div>
       <Script
