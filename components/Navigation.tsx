@@ -6,8 +6,11 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn, spring } from "@/lib/utils";
+import { portalLinks } from "@/lib/site";
 import { ShinyButton } from "./ShinyButton";
 import { Logo } from "./Logo";
+
+const joinHref = portalLinks?.signUp ?? "#subscribe";
 
 const links = [
   { label: "Home", href: "/" },
@@ -71,8 +74,16 @@ export function Navigation() {
           })}
         </ul>
 
-        <div className="hidden md:block">
-          <ShinyButton href="#subscribe" className="px-5 py-2.5 text-[13px]">
+        <div className="hidden md:flex items-center gap-2">
+          {portalLinks && (
+            <a
+              href={portalLinks.signIn}
+              className="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 transition-colors"
+            >
+              Sign in
+            </a>
+          )}
+          <ShinyButton href={joinHref} className="px-5 py-2.5 text-[13px]">
             Join the club
           </ShinyButton>
         </div>
@@ -106,9 +117,19 @@ export function Navigation() {
                   </Link>
                 </li>
               ))}
+              {portalLinks && (
+                <li>
+                  <a
+                    href={portalLinks.signIn}
+                    className="block rounded-2xl px-4 py-3 text-sm font-medium text-ink-800 hover:bg-cream-100"
+                  >
+                    Sign in
+                  </a>
+                </li>
+              )}
               <li className="pt-2">
                 <ShinyButton
-                  href="#subscribe"
+                  href={joinHref}
                   className="w-full justify-center"
                 >
                   Join the club

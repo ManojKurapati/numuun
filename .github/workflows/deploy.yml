@@ -34,6 +34,8 @@ jobs:
         run: npx next build
         env:
           NODE_ENV: production
+          # Parent portal origin (repo Settings → Secrets and variables → Actions → Variables).
+          NEXT_PUBLIC_PORTAL_URL: ${{ vars.PORTAL_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

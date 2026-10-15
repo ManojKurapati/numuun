@@ -13,6 +13,18 @@ to `main` redeploys numuun.health.
 
 Posts with a future `date` stay hidden until a build runs on or after that day.
 
+## Link to the parent portal
+
+"Join the club" and "Sign in" in the top navigation open the parent portal's
+`/sign-up` and `/sign-in` pages (the separate numu app on Google Cloud Run).
+
+1. On GitHub: **Settings → Secrets and variables → Actions → Variables → New
+   repository variable**, name `PORTAL_URL`, value the portal origin, e.g.
+   `https://app.numuun.health` (no trailing path).
+2. Re-run the **Deploy to GitHub Pages** workflow (or push to `main`).
+
+Without `PORTAL_URL`, "Join the club" keeps scrolling to the newsletter form.
+
 ## Collect subscriber emails (Google Sheet)
 
 Subscribers land in the Google Sheet via a small Apps Script web app.
